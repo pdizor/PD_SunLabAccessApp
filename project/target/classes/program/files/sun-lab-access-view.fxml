@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="program.files.Controller">
+  <tabs>
+    <Tab text="Filter">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <VBox alignment="CENTER" layoutX="38.0" layoutY="27.0" prefHeight="319.0" prefWidth="519.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="64.0" text="Search By: " />
+                              <CheckBox fx:id="idCheckBox" mnemonicParsing="false" prefHeight="18.0" prefWidth="48.0" text="ID" />
+                              <CheckBox fx:id="dateCheckBox" mnemonicParsing="false" prefHeight="18.0" prefWidth="58.0" text="Date" />
+                              <CheckBox fx:id="timeCheckBox" mnemonicParsing="false" prefHeight="18.0" prefWidth="94.0" text="Time of Day" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="30.0" text="ID: " />
+                              <TextField fx:id="idSearchTextField" prefHeight="26.0" prefWidth="168.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="34.0" text="Date: " />
+                              <DatePicker fx:id="dateTextField" prefHeight="26.0" prefWidth="170.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="98.0" prefWidth="519.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="74.0" text="Time of Day:" />
+                               <ComboBox fx:id="timeComboBox" prefHeight="26.0" prefWidth="137.0" value="Morning">
+                                   <items>
+                                       <FXCollections fx:factory="observableArrayList">
+                                           <String fx:value="Early Morning" />
+                                           <String fx:value="Morning" />
+                                           <String fx:value="Afternoon" />
+                                           <String fx:value="Night" />
+                                       </FXCollections>
+                                   </items>
+                               </ComboBox>
+                           </children>
+                        </HBox>
+                        <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchButtonAction" text="Search" />
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="filterStatusLabel" maxWidth="Infinity" textAlignment="CENTER" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Results">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="resultsTableView" layoutX="17.0" layoutY="16.0" prefHeight="323.0" prefWidth="386.0">
+                    <columns>
+                      <TableColumn fx:id="idColumn" prefWidth="151.59999924898148" text="ID" />
+                      <TableColumn fx:id="timeColumn" minWidth="0.0" prefWidth="148.40005493164062" text="TIME" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+    <Tab text="Manage">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <VBox alignment="CENTER" layoutX="45.0" layoutY="25.0" prefHeight="298.0" prefWidth="507.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="74.0" prefWidth="507.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="25.0" text="ID: " />
+                              <TextField fx:id="idManageTextField" prefHeight="26.0" prefWidth="161.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="59.0" prefWidth="507.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="46.0" text="Action: " />
+                              <RadioButton fx:id="activateRadioButton" mnemonicParsing="false" onAction="#displayAddingUserFields" prefHeight="18.0" prefWidth="82.0" text="Activate">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="adminActionToggleGroup" />
+                                 </toggleGroup></RadioButton>
+                              <RadioButton fx:id="disableRadioButton" mnemonicParsing="false" onAction="#displayAddingUserFields" prefHeight="18.0" prefWidth="74.0" text="Disable" toggleGroup="$adminActionToggleGroup" />
+                              <RadioButton fx:id="reactivateRadioButton" mnemonicParsing="false" onAction="#displayAddingUserFields" prefHeight="18.0" prefWidth="84.0" text="Reactivate" toggleGroup="$adminActionToggleGroup" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="addingUserContainer" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" visible="false">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="43.0" text="Name:" />
+                              <TextField fx:id="nameTextField" prefHeight="26.0" prefWidth="171.0" />
+                              <Label text="      " />
+                              <Label prefHeight="18.0" prefWidth="53.0" text="Position: " />
+                              <TextField fx:id="positionTextField" prefHeight="26.0" prefWidth="160.0" />
+                           </children>
+                        </HBox>
+                        <Button fx:id="applyButton" mnemonicParsing="false" onAction="#applyButtonAction" text="Apply" />
+                        <HBox alignment="CENTER" prefHeight="52.0" prefWidth="507.0">
+                           <children>
+                              <Label fx:id="successLabel" maxWidth="Infinity" prefHeight="18.0" textAlignment="CENTER" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>
